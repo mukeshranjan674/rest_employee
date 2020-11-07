@@ -19,6 +19,21 @@
       "id": 4,
       "name": "Harish",
       "salary": 50000
+    },
+    {
+      "id": 7,
+      "name": "Vishnu",
+      "salary": 80000
+    },
+    {
+      "id": 5,
+      "name": "Jay",
+      "salary": 60000
+    },
+    {
+      "id": 6,
+      "name": "Shivam",
+      "salary": 70000
     }
   ]
 }

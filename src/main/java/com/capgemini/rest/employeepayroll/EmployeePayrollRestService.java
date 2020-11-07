@@ -19,6 +19,15 @@ public class EmployeePayrollRestService {
 		employees.add(employee);
 	}
 
+	/**
+	 * UC2
+	 * 
+	 * @param employees
+	 */
+	public void addEmployeeList(List<Employee> employees) {
+		employees.forEach(employee -> this.employees.add(employee));
+	}
+
 	public List<Employee> getEmployeeList() {
 		return employees;
 	}
