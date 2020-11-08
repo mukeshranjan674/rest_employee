@@ -18,4 +18,8 @@ public class Employee {
 	public Integer getId() {
 		return this.id;
 	}
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
 }

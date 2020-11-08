@@ -35,4 +35,23 @@ public class EmployeePayrollRestService {
 	public int getCount() {
 		return employees.size();
 	}
+
+	/**
+	 * UC3
+	 * 
+	 * @param name
+	 * @param salary
+	 */
+	public void updateEmployee(String name, double salary) {
+		Employee employee = this.employees.stream().filter(emp -> emp.getName().equals(name))
+										  .findAny()
+										  .orElse(null);
+		employee.setSalary(salary);
+	}
+
+	public Employee getEmployee(String name) {
+		return this.employees.stream().filter(emp -> emp.getName().equals(name))
+								      .findAny()
+								      .orElse(null);
+	}
 }

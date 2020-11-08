@@ -14,6 +14,7 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -50,6 +51,21 @@ public class EmployeePayrollRestServiceTest {
 		assertEquals(7, getEmployeeListFromJsonServer().size());
 	}
 
+	/**
+	 * UC3
+	 */
+	@Test
+	public void givenEmployeeShouldGetUpdatedInTheJsonServer() {
+		employeePayrollRestService.updateEmployee("Shivam", 1548545.0);
+		Employee employee = employeePayrollRestService.getEmployee("Shivam");
+		String empJson = new Gson().toJson(employee);
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		request.body(empJson);
+		Response response = request.put("/employees/" + employee.getId());
+		assertEquals(200, response.getStatusCode());
+	}
+
 	private void addMultipleEmployeeUsingThreads(List<Employee> employees) {
 		Map<Integer, Boolean> addEmployeeStatus = new HashMap<>();
 		for (Employee employee : employees) {
@@ -82,10 +98,10 @@ public class EmployeePayrollRestServiceTest {
 
 	private Response addEmployeeToJsonServer(Employee employee) {
 		String employeeJson = new Gson().toJson(employee);
-		RequestSpecification requestSpecification = RestAssured.given();
-		requestSpecification.header("Content-Type", "application/json");
-		requestSpecification.body(employeeJson);
-		return requestSpecification.post("/employees");
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		request.body(employeeJson);
+		return request.post("/employees");
 	}
 
 	private List<Employee> getEmployeeListFromJsonServer() {
