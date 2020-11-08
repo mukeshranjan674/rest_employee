@@ -14,7 +14,6 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -64,6 +63,15 @@ public class EmployeePayrollRestServiceTest {
 		request.body(empJson);
 		Response response = request.put("/employees/" + employee.getId());
 		assertEquals(200, response.getStatusCode());
+	}
+
+	/**
+	 * UC4
+	 */
+	@Test
+	public void whenEmployeeListIsRetrievedFromJsonServerShouldMatchTheCount() {
+		List<Employee> employees = this.getEmployeeListFromJsonServer();
+		assertEquals(7, employees.size());
 	}
 
 	private void addMultipleEmployeeUsingThreads(List<Employee> employees) {
