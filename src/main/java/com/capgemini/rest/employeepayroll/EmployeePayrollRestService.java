@@ -28,6 +28,11 @@ public class EmployeePayrollRestService {
 		employees.forEach(employee -> this.employees.add(employee));
 	}
 
+	/**
+	 * UC4
+	 * 
+	 * @return
+	 */
 	public List<Employee> getEmployeeList() {
 		return employees;
 	}
@@ -43,15 +48,20 @@ public class EmployeePayrollRestService {
 	 * @param salary
 	 */
 	public void updateEmployee(String name, double salary) {
-		Employee employee = this.employees.stream().filter(emp -> emp.getName().equals(name))
-										  .findAny()
-										  .orElse(null);
+		Employee employee = this.employees.stream().filter(emp -> emp.getName().equals(name)).findAny().orElse(null);
 		employee.setSalary(salary);
 	}
 
 	public Employee getEmployee(String name) {
-		return this.employees.stream().filter(emp -> emp.getName().equals(name))
-								      .findAny()
-								      .orElse(null);
+		return this.employees.stream().filter(emp -> emp.getName().equals(name)).findAny().orElse(null);
+	}
+
+	/**
+	 * UC5
+	 * 
+	 * @param employee
+	 */
+	public void deleteEmployee(Employee employee) {
+		this.employees.remove(employee);
 	}
 }

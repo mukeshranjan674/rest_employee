@@ -73,6 +73,19 @@ public class EmployeePayrollRestServiceTest {
 		List<Employee> employees = this.getEmployeeListFromJsonServer();
 		assertEquals(7, employees.size());
 	}
+	
+	/**
+	 * UC5
+	 */
+	@Test
+	public void givenEmployeeWhenDeletedShouldGetDeletedFromJsonServer() {
+		Employee employee = employeePayrollRestService.getEmployee("Harish");
+		employeePayrollRestService.deleteEmployee(employee);
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		Response response = request.delete("/employees/" + employee.getId());
+		assertEquals(200, response.getStatusCode());
+	}
 
 	private void addMultipleEmployeeUsingThreads(List<Employee> employees) {
 		Map<Integer, Boolean> addEmployeeStatus = new HashMap<>();
